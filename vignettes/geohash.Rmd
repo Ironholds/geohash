@@ -1,0 +1,57 @@
+---
+title: "Geohashing in R"
+author: "Oliver Keyes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Geohashing in R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*geohashes* are a way of representing latitude/longitude pairs as individual, short strings of numbers and letters. The <code>geohash</code> package provides tools for creating and manipulating these.
+
+## Encoding and decoding
+
+To turn a set of latitude/longitude pairs into a geohash, you need the <code>gh_encode</code> function. This accepts latitude, longitude and precision arguments - where precision refers to the number of characters the hash should take up and (correspondingly) how accurate it is. Any precision between 1 and 10 is acceptable - something outside that range will produce a warning, and result in a default of 6 being used.
+
+```{r, eval=FALSE}
+# Encode!
+gh_encode(42.60498046875, -5.60302734375, 5)
+# [1] "ezs42"
+```
+
+To decode, you use <code>gh_decode</code>, which works the other way around - it accepts hashes, and returns a data.frame of latitude, longitude, and the error rates for each (since some degree of inaccuracy is introduced by the hashing process):
+
+```{r, eval=FALSE}
+# Decode!
+gh_decode("ezs42")
+# lat      lng      lat_error  lng_error
+# 42.60498 42.60498 0.02197266 0.02197266
+```
+
+Both functions are fully vectorised, so if you've got an entire set of latitudes and longitudes (or an entire set of hashes) it's not a problem! They're based on compiled code and can handle a million lat/long pairs (or hashes) in a third of a second.
+
+## Neighbours
+
+Because geohashes are calculated for geographic "boxes", they have neighbours; a hash that represents the block to the north, or south, or northwest, or...so on and so forth. You can extract these in one of two ways. With <code>gh_neighbours</code>, it'll extract every hash around the hash you provide:
+
+```{r, eval=FALSE}
+# Get all neighbours!
+gh_neighbours("ezs42")
+#  north northeast  east southeast south southwest  west northwest
+#  ezs48     ezs49 ezs43     ezs41 ezs40     ezefp ezefr     ezefx
+```
+
+If you only want a specific neighbour, no problem! You can use convenience functions named after the cardinal and intercardinal points (<code>north()</code>, <code>northwest()</code> etc) to grab individual neighbours:
+
+```{r, eval=FALSE}
+# Get the southeast neighbours!
+southeast("ezs42")
+# [1] "ezs41"
+```
+
+These functions are slower than encoding and decoding, since they're a lot more complex, but still pretty fast.
+
+## Feature ideas or issues
+If you have ideas for other geohash-related features, or run into a bug, the best approachis to either [request/report it](https://github.com/Ironholds/geohash/issues) or [add it](https://github.com/Ironholds/geohash/pulls)!
