@@ -10,6 +10,6 @@ The geohash package provides tools to encode lat/long pairs into geohashes, deco
 and identify neighbours their neighbours.
 }
 \seealso{
-the \href{http://cran.rstudio.com/web/packages/geohash/vignettes/geohash.html}{package vignette}.
+the \href{https://cran.r-project.org/web/packages/geohash/vignettes/geohash.html}{package vignette}.
 }
 

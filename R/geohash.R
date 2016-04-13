@@ -2,7 +2,7 @@
 #' @name geohash
 #' @description The geohash package provides tools to encode lat/long pairs into geohashes, decode those geohashes,
 #' and identify neighbours their neighbours.
-#' @seealso the \href{http://cran.rstudio.com/web/packages/geohash/vignettes/geohash.html}{package vignette}.
+#' @seealso the \href{https://cran.r-project.org/web/packages/geohash/vignettes/geohash.html}{package vignette}.
 #' @useDynLib geohash
 #' @importFrom Rcpp sourceCpp
 #' @docType package
