@@ -5,7 +5,7 @@ Version: 0.1.0
 Date: 2016-04-09
 Author: Oliver Keyes [aut, cre], G. Nagel [cph]
 Maintainer: Oliver Keyes <ironholds@gmail.com>
-Description: The geohash package provides tools to encode lat/long pairs into geohashes, decode those geohashes,
+Description: Provides tools to encode lat/long pairs into geohashes, decode those geohashes,
              and identify their neighbours.
 License: MIT + file LICENSE
 URL: https://github.com/Ironholds/geohash/
