@@ -5,6 +5,8 @@ test_that("A simple lat/lng pair will correctly decoding", {
   result <- gh_decode("ezs42")
   expect_less_than(result$lat[1], 43)
   expect_more_than(result$lat[1], 42)
+  expect_less_than(result$lng[1], -4)
+  expect_more_than(result$lng[1], -6)
 })
 
 test_that("NAs are appropriately handled when decoding", {

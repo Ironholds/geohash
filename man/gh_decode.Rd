@@ -23,7 +23,7 @@ gh_encode(lat = 42.60498046875, lng = -5.60302734375, precision = 5)
 
 gh_decode("ezs42")
 # lat      lng      lat_error  lng_error
-# 42.60498 42.60498 0.02197266 0.02197266
+# 42.60498 -5.603027 0.02197266 0.02197266
 }
 \seealso{
 \code{\link{gh_encode}} for generating geohashes, and

@@ -24,14 +24,14 @@ Please note that this project is released with a [Contributor Code of Conduct](h
 By participating in this project you agree to abide by its terms.
 
 ### Installation
+    
+To get the development version (currently recommended):
 
+    devtools::install_github("ironholds/geohash")
+    
 The latest CRAN version can be obtained via:
 
     install.packages("geohash")
-    
-To get the development version:
-
-    devtools::install_github("ironholds/geohash")
 
 ### Dependencies
 * R. Doy.

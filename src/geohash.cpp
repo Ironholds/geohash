@@ -85,7 +85,7 @@ CharacterVector gh_encode(NumericVector lats, NumericVector lngs,
 //'
 //'gh_decode("ezs42")
 //'# lat      lng      lat_error  lng_error
-//'# 42.60498 42.60498 0.02197266 0.02197266
+//'# 42.60498 -5.603027 0.02197266 0.02197266
 //'@export
 //[[Rcpp::export]]
 DataFrame gh_decode(CharacterVector hashes){
@@ -118,7 +118,7 @@ DataFrame gh_decode(CharacterVector hashes){
   }
 
   return DataFrame::create(_["lat"] = lats,
-                           _["lng"] = lats,
+                           _["lng"] = lngs,
                            _["lat_error"] = lat_error,
                            _["lng_error"] = lng_error);
 }

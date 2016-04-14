@@ -49,7 +49,7 @@ gh_encode <- function(lats, lngs, precision) {
 #'
 #'gh_decode("ezs42")
 #'# lat      lng      lat_error  lng_error
-#'# 42.60498 42.60498 0.02197266 0.02197266
+#'# 42.60498 -5.603027 0.02197266 0.02197266
 #'@export
 gh_decode <- function(hashes) {
     .Call('geohash_gh_decode', PACKAGE = 'geohash', hashes)
