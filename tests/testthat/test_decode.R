@@ -1,17 +1,17 @@
-context("Test geohash decoding")
+testthat::context("Test geohash decoding")
 
-test_that("A simple lat/lng pair will correctly decoding", {
+testthat::test_that("A simple lat/lng pair will correctly decoding", {
 
   result <- gh_decode("ezs42")
-  expect_less_than(result$lat[1], 43)
-  expect_more_than(result$lat[1], 42)
-  expect_less_than(result$lng[1], -4)
-  expect_more_than(result$lng[1], -6)
+  testthat::expect_lt(result$lat[1], 43)
+  testthat::expect_gt(result$lat[1], 42)
+  testthat::expect_lt(result$lng[1], -4)
+  testthat::expect_gt(result$lng[1], -6)
 })
 
-test_that("NAs are appropriately handled when decoding", {
+testthat::test_that("NAs are appropriately handled when decoding", {
 
   result <- gh_decode(c("ezs42", NA))
-  expect_true(is.na(result$lat[2]))
+  testthat::expect_true(is.na(result$lat[2]))
 
 })
