@@ -4,7 +4,7 @@
 \alias{gh_encode}
 \title{Encode Latitude and Longitude Values}
 \usage{
-gh_encode(lats, lngs, precision)
+gh_encode(lats, lngs, precision = 6L)
 }
 \arguments{
 \item{lats}{a numeric vector of latitude values.}
@@ -13,8 +13,8 @@ gh_encode(lats, lngs, precision)
 as \code{lat}.}
 
 \item{precision}{an integer representing the precision the hashes should have.
-This should be between 1 and 10; if the precision requested is outside that range,
-it will use a default precision of 6.}
+This should be between 1 and 10; if the precision requested is greater than 10, it will
+use 10 - if less than 1, it will error.}
 }
 \value{
 a character vector of hashes, the same length as \code{lat} and \code{lng},

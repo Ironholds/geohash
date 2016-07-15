@@ -10,8 +10,8 @@
 //'as \code{lat}.
 //'
 //'@param precision an integer representing the precision the hashes should have.
-//'This should be between 1 and 10; if the precision requested is outside that range,
-//'it will use a default precision of 6.
+//'This should be between 1 and 10; if the precision requested is greater than 10, it will
+//'use 10 - if less than 1, it will error.
 //'
 //'@return a character vector of hashes, the same length as \code{lat} and \code{lng},
 //'with \code{NA} values where one of the equivalent lat/lng pair was NA.
@@ -27,16 +27,20 @@
 //'@export
 //[[Rcpp::export]]
 CharacterVector gh_encode(NumericVector lats, NumericVector lngs,
-                          IntegerVector precision){
+                          IntegerVector precision = 6){
 
   // Initial checks
   if(precision.size() < 1 || IntegerVector::is_na(precision[0])){
     Rcpp::stop("A value for precision must be provided, and cannot be NA");
   }
+  if(precision[0] < 1){
+    Rcpp::stop("Precision must be greater than 1");
+  }
+
   signed int& precision_ref = precision[0];
-  if(precision_ref < 1 || precision_ref > 10){
-    Rcpp::warning("Precision must be between 1 and 10. Default of 6 used.");
-    precision_ref = 6;
+  if(precision_ref > 10){
+    Rcpp::warning("Precision is greater than 10, the maximum. 10 used instead.");
+    precision_ref = 10;
   }
 
   const unsigned int input_size = lats.size();

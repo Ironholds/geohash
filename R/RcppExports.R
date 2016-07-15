@@ -11,8 +11,8 @@
 #'as \code{lat}.
 #'
 #'@param precision an integer representing the precision the hashes should have.
-#'This should be between 1 and 10; if the precision requested is outside that range,
-#'it will use a default precision of 6.
+#'This should be between 1 and 10; if the precision requested is greater than 10, it will
+#'use 10 - if less than 1, it will error.
 #'
 #'@return a character vector of hashes, the same length as \code{lat} and \code{lng},
 #'with \code{NA} values where one of the equivalent lat/lng pair was NA.
@@ -26,7 +26,7 @@
 #'and \code{\link{gh_neighbours}} for retrieving the neighbouring hashes to a particular hash.
 #'
 #'@export
-gh_encode <- function(lats, lngs, precision) {
+gh_encode <- function(lats, lngs, precision = 6L) {
     .Call('geohash_gh_encode', PACKAGE = 'geohash', lats, lngs, precision)
 }
 

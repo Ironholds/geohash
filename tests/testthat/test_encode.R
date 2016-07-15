@@ -22,3 +22,18 @@ testthat::test_that("NAs are appropriately handled when encoding", {
   testthat::expect_true(is.na(hash[2]))
 
 })
+
+testthat::test_that("an NA or <1 precision produces an error", {
+
+  testthat::expect_error(gh_encode(12.3, 1.3, -1))
+  testthat::expect_error(gh_encode(12.3, 1.3, NA_integer_))
+
+})
+
+
+testthat::test_that(">10 precision produces a warning and 10-length entry", {
+
+  testthat::expect_warning(gh_encode(12.3, 1.3, 11))
+  testthat::expect_equal(nchar(gh_encode(12.3, 1.3, 11)), 10)
+
+})

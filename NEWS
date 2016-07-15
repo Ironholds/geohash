@@ -1,5 +1,11 @@
-Version 0.1.2
+Version 0.2.0 [WIP]
+-------------------------------------------------------------------------
 
+BUG FIXES
+* gh_encode has a default precision of 6, errors on negative precision values, and falls back to 10 for >10 values.
+
+Version 0.1.2
+-------------------------------------------------------------------------
 BUG FIXES
 * Longitudes are now correctly returned from gh_decode (thanks to Alun Hewinson for spotting this) #1
 
