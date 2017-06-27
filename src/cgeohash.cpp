@@ -65,7 +65,7 @@ int base32_codes_index_of(char c)
   return base32_indexes.find(c)->second;
 }
 
-std::string encode(double latitude, double longitude, int precision){
+std::string encode(double latitude, double longitude, unsigned int precision){
   // DecodedBBox for the lat/lon + errors
   std::string output;
   DecodedBBox bbox;
@@ -116,7 +116,7 @@ std::string encode(double latitude, double longitude, int precision){
       }
   }
   return output;
-};
+}
 
 DecodedBBox decode_bbox(std::string _hash_string){
     // Copy of the string down-cased
@@ -170,7 +170,7 @@ DecodedHash decode(std::string hash_string){
     output.latitude_err  = bbox.maxlat - output.latitude;
     output.longitude_err = bbox.maxlon - output.longitude;
     return output;
-};
+}
 
 std::string neighbor(std::string hash_string, const int direction [])
 {
