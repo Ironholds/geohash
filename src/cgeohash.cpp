@@ -38,20 +38,20 @@ const char base32_codes[] = {
     'z'
 };
 
-// Build a map of characters -> index position from the above array
-const std::map<char, int> build_base32_indexes();
-const std::map<char, int> base32_indexes = build_base32_indexes();
 
 // Reverse map of characters --> index position
 const std::map<char, int> build_base32_indexes(){
   std::map<char, int> output;
 
-  for(int i = 0, max = 36; i < max; i++) {
+  for(unsigned int i = 0; i < strlen(base32_codes); i++) {
       output.insert( std::pair<char, int>(base32_codes[i], i) );
   }
 
   return output;
 }
+
+// Build a map of characters -> index position from the above array
+const std::map<char, int> base32_indexes = build_base32_indexes();
 
 // Convert the index position to the character in the array
 char base32_codes_value_of(int index)
