@@ -1,13 +1,14 @@
-Version 0.2.0 [WIP]
+Version 0.2.0
 -------------------------------------------------------------------------
 
 BUG FIXES
-* gh_encode has a default precision of 6, errors on negative precision values, and falls back to 10 for >10 values.
+* gh_encode has a default precision of 6, errors on negative precision values, and falls back to 10 for >10 values. (#4)
+* geohash now works under gcc 7.1 (#6)
 
 Version 0.1.2
 -------------------------------------------------------------------------
 BUG FIXES
-* Longitudes are now correctly returned from gh_decode (thanks to Alun Hewinson for spotting this) #1
+* Longitudes are now correctly returned from gh_decode (thanks to Alun Hewinson for spotting this) (#1)
 
 Version 0.1.1
 -------------------------------------------------------------------------

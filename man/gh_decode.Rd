@@ -30,4 +30,3 @@ gh_decode("ezs42")
 \code{\link{gh_neighbours}} for identifying the neighbouring hash boxes
 to a geohash.
 }
-

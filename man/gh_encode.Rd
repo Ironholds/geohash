@@ -34,4 +34,3 @@ gh_encode(lat = 42.60498046875, lng = -5.60302734375, precision = 5)
 \code{\link{gh_decode}}, for taking geohashes and turning them back into coordinates,
 and \code{\link{gh_neighbours}} for retrieving the neighbouring hashes to a particular hash.
 }
-

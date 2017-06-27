@@ -4,6 +4,7 @@
 \name{geohash}
 \alias{geohash}
 \alias{geohash-package}
+\alias{geohash-package}
 \title{Tools for handling URLs}
 \description{
 The geohash package provides tools to encode lat/long pairs into geohashes, decode those geohashes,
@@ -12,4 +13,3 @@ and identify neighbours their neighbours.
 \seealso{
 the \href{https://cran.r-project.org/package=geohash/vignettes/geohash.html}{package vignette}.
 }
-

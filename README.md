@@ -31,7 +31,3 @@ To get the development version (currently recommended):
 The latest CRAN version can be obtained via:
 
     install.packages("geohash")
-
-### Dependencies
-* R. Doy.
-* [Rcpp](https://cran.r-project.org/package=Rcpp)
