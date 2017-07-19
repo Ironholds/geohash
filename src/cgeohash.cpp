@@ -38,20 +38,20 @@ const char base32_codes[] = {
     'z'
 };
 
-// Build a map of characters -> index position from the above array
-const std::map<char, int> build_base32_indexes();
-const std::map<char, int> base32_indexes = build_base32_indexes();
 
 // Reverse map of characters --> index position
 const std::map<char, int> build_base32_indexes(){
   std::map<char, int> output;
 
-  for(int i = 0, max = 36; i < max; i++) {
+  for(unsigned int i = 0; i < strlen(base32_codes); i++) {
       output.insert( std::pair<char, int>(base32_codes[i], i) );
   }
 
   return output;
 }
+
+// Build a map of characters -> index position from the above array
+const std::map<char, int> base32_indexes = build_base32_indexes();
 
 // Convert the index position to the character in the array
 char base32_codes_value_of(int index)
@@ -65,7 +65,7 @@ int base32_codes_index_of(char c)
   return base32_indexes.find(c)->second;
 }
 
-std::string encode(double latitude, double longitude, int precision){
+std::string encode(double latitude, double longitude, unsigned int precision){
   // DecodedBBox for the lat/lon + errors
   std::string output;
   DecodedBBox bbox;
@@ -116,7 +116,7 @@ std::string encode(double latitude, double longitude, int precision){
       }
   }
   return output;
-};
+}
 
 DecodedBBox decode_bbox(std::string _hash_string){
     // Copy of the string down-cased
@@ -170,7 +170,7 @@ DecodedHash decode(std::string hash_string){
     output.latitude_err  = bbox.maxlat - output.latitude;
     output.longitude_err = bbox.maxlon - output.longitude;
     return output;
-};
+}
 
 std::string neighbor(std::string hash_string, const int direction [])
 {
@@ -179,7 +179,7 @@ std::string neighbor(std::string hash_string, const int direction [])
     lonlat.latitude   += direction[0] * lonlat.latitude_err * 2;
     lonlat.longitude  += direction[1] * lonlat.longitude_err * 2;
 
-    return encode(lonlat.latitude, lonlat.longitude, hash_string.length());
+     return encode(lonlat.latitude, fix_longitude(lonlat.longitude), hash_string.length());
 }
 
 std::vector < std::string > all_neighbours(std::string hash){
@@ -192,27 +192,39 @@ std::vector < std::string > all_neighbours(std::string hash){
                      (lonlat.longitude + (0 * lonlat.longitude_err * 2)),
                      input_size);
   output[1] = encode((lonlat.latitude + (1 * lonlat.latitude_err * 2)), // Northeast
-                     (lonlat.longitude + (1 * lonlat.longitude_err * 2)),
+                     fix_longitude((lonlat.longitude + (1 * lonlat.longitude_err * 2))),
                      input_size);
   output[2] = encode((lonlat.latitude + (0 * lonlat.latitude_err * 2)), // East
-                     (lonlat.longitude + (1 * lonlat.longitude_err * 2)),
+                     fix_longitude((lonlat.longitude + (1 * lonlat.longitude_err * 2))),
                      input_size);
   output[3] = encode((lonlat.latitude + (-1 * lonlat.latitude_err * 2)), // Southeast
-                     (lonlat.longitude + (1 * lonlat.longitude_err * 2)),
+                     fix_longitude((lonlat.longitude + (1 * lonlat.longitude_err * 2))),
                      input_size);
   output[4] = encode((lonlat.latitude + (-1 * lonlat.latitude_err * 2)), // South
                      (lonlat.longitude + (0 * lonlat.longitude_err * 2)),
                      input_size);
   output[5] = encode((lonlat.latitude + (-1 * lonlat.latitude_err * 2)), // Southwest
-                     (lonlat.longitude + (-1 * lonlat.longitude_err * 2)),
+                     fix_longitude((lonlat.longitude + (-1 * lonlat.longitude_err * 2))),
                      input_size);
   output[6] = encode((lonlat.latitude + (0 * lonlat.latitude_err * 2)), // West
-                     (lonlat.longitude + (-1 * lonlat.longitude_err * 2)),
+                     fix_longitude((lonlat.longitude + (-1 * lonlat.longitude_err * 2))),
                      input_size);
   output[7] = encode((lonlat.latitude + (1 * lonlat.latitude_err * 2)), // Northwest
-                     (lonlat.longitude + (-1 * lonlat.longitude_err * 2)),
+                     fix_longitude((lonlat.longitude + (-1 * lonlat.longitude_err * 2))),
                      input_size);
   return output;
 }
-} // end namespace cgeohash
 
+
+double fix_longitude(double longitude){
+  if(longitude < -180){
+    longitude += 360.;
+    return longitude;
+  }
+  if(longitude > 180){
+    longitude -= 360.;
+    return longitude;
+  }
+  return(longitude);
+}
+} // end namespace cgeohash
