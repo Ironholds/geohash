@@ -33,6 +33,7 @@ DecodedBBox decode_bbox(std::string hash_string);
 std::string neighbor(std::string hash_string, const int direction []);
 
 std::vector < std::string > all_neighbours(std::string hash);
+double fix_longitude(double longitude);
 }
 
 #endif
