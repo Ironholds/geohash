@@ -18,7 +18,7 @@ struct DecodedHash {
 };
 
 // Encode a pair of latitude and longitude into geohash
-std::string encode(double latitude, double longitude, int precision);
+std::string encode(double latitude, double longitude, unsigned int precision);
 
 // Decode a hash string into pair of latitude and longitude
 DecodedHash decode(std::string hash_string);
@@ -33,6 +33,7 @@ DecodedBBox decode_bbox(std::string hash_string);
 std::string neighbor(std::string hash_string, const int direction []);
 
 std::vector < std::string > all_neighbours(std::string hash);
+double fix_longitude(double longitude);
 }
 
 #endif
