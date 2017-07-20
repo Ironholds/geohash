@@ -179,7 +179,7 @@ std::string neighbor(std::string hash_string, const int direction [])
     lonlat.latitude   += direction[0] * lonlat.latitude_err * 2;
     lonlat.longitude  += direction[1] * lonlat.longitude_err * 2;
 
-     return encode(lonlat.latitude, fix_longitude(lonlat.longitude), hash_string.length());
+    return encode(lonlat.latitude, fix_longitude(lonlat.longitude), hash_string.length());
 }
 
 std::vector < std::string > all_neighbours(std::string hash){
@@ -217,11 +217,11 @@ std::vector < std::string > all_neighbours(std::string hash){
 
 
 double fix_longitude(double longitude){
-  if(longitude < -180){
+  if(longitude < -180.){
     longitude += 360.;
     return longitude;
   }
-  if(longitude > 180){
+  if(longitude > 180.){
     longitude -= 360.;
     return longitude;
   }
