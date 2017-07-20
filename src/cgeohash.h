@@ -32,7 +32,11 @@ DecodedBBox decode_bbox(std::string hash_string);
 // Ex: [-1,-1] == southwest
 std::string neighbor(std::string hash_string, const int direction []);
 
+std::string neighbor(DecodedHash lonlat, const int direction [], const int length);
+
 std::vector < std::string > all_neighbours(std::string hash);
+
+double fix_longitude(double longitude);
 }
 
 #endif
