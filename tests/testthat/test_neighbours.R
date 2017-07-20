@@ -44,3 +44,16 @@ testthat::test_that("Neighbours can be found across 180|-180 divide", {
   testthat::expect_that(result$west[1], testthat::equals("w"))
   testthat::expect_that(result$northwest[1], testthat::equals("y"))
 })
+
+testthat::test_that("Neighbours can be found around the poles", {
+
+  result <- gh_neighbours("p")
+  testthat::expect_that(result$north[1], testthat::equals("r"))
+  testthat::expect_that(result$northeast[1], testthat::equals("2"))
+  testthat::expect_that(result$east[1], testthat::equals("0"))
+  testthat::expect_that(result$southeast[1], testthat::equals("h"))
+  testthat::expect_that(result$south[1], testthat::equals("5"))
+  testthat::expect_that(result$southwest[1], testthat::equals("4"))
+  testthat::expect_that(result$west[1], testthat::equals("n"))
+  testthat::expect_that(result$northwest[1], testthat::equals("q"))
+})

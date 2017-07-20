@@ -1,4 +1,5 @@
 #include "cgeohash.h"
+#include <math.h>
 
 namespace cgeohash {
 
@@ -38,6 +39,15 @@ const char base32_codes[] = {
     'z'
 };
 
+// direction constants
+const int dir_east[] = {0,1};
+const int dir_southeast[] = {-1,1};
+const int dir_south[] = {-1,0};
+const int dir_southwest[] = {-1,-1};
+const int dir_west[] = {0,-1};
+const int dir_northwest[] = {1,-1};
+const int dir_north[] = {1,0};
+const int dir_northeast[] = {1,1};
 
 // Reverse map of characters --> index position
 const std::map<char, int> build_base32_indexes(){
@@ -174,12 +184,24 @@ DecodedHash decode(std::string hash_string){
 
 std::string neighbor(std::string hash_string, const int direction [])
 {
-    // Adjust the DecodedHash for the direction of the neighbors
-    DecodedHash lonlat = decode(hash_string);
-    lonlat.latitude   += direction[0] * lonlat.latitude_err * 2;
-    lonlat.longitude  += direction[1] * lonlat.longitude_err * 2;
+  DecodedHash lonlat = decode(hash_string);
 
-    return encode(lonlat.latitude, fix_longitude(lonlat.longitude), hash_string.length());
+  return neighbor(lonlat, direction, hash_string.length());
+}
+
+std::string neighbor(DecodedHash lonlat, const int direction [], const int length)
+{
+  // Adjust the DecodedHash for the direction of the neighbors
+  lonlat.latitude   += direction[0] * lonlat.latitude_err * 2;
+  lonlat.longitude  += direction[1] * lonlat.longitude_err * 2;
+
+  //pole check
+  if(fabs(lonlat.latitude)>90.){
+    lonlat.latitude   -= direction[0] * lonlat.latitude_err * 2;
+    lonlat.longitude  += 180.0;
+  }
+
+  return encode(lonlat.latitude, fix_longitude(lonlat.longitude), length);
 }
 
 std::vector < std::string > all_neighbours(std::string hash){
@@ -188,30 +210,14 @@ std::vector < std::string > all_neighbours(std::string hash){
   DecodedHash lonlat = decode(hash);
   unsigned int input_size = hash.size();
 
-  output[0] = encode((lonlat.latitude + (1 * lonlat.latitude_err * 2)), // North
-                     (lonlat.longitude + (0 * lonlat.longitude_err * 2)),
-                     input_size);
-  output[1] = encode((lonlat.latitude + (1 * lonlat.latitude_err * 2)), // Northeast
-                     fix_longitude((lonlat.longitude + (1 * lonlat.longitude_err * 2))),
-                     input_size);
-  output[2] = encode((lonlat.latitude + (0 * lonlat.latitude_err * 2)), // East
-                     fix_longitude((lonlat.longitude + (1 * lonlat.longitude_err * 2))),
-                     input_size);
-  output[3] = encode((lonlat.latitude + (-1 * lonlat.latitude_err * 2)), // Southeast
-                     fix_longitude((lonlat.longitude + (1 * lonlat.longitude_err * 2))),
-                     input_size);
-  output[4] = encode((lonlat.latitude + (-1 * lonlat.latitude_err * 2)), // South
-                     (lonlat.longitude + (0 * lonlat.longitude_err * 2)),
-                     input_size);
-  output[5] = encode((lonlat.latitude + (-1 * lonlat.latitude_err * 2)), // Southwest
-                     fix_longitude((lonlat.longitude + (-1 * lonlat.longitude_err * 2))),
-                     input_size);
-  output[6] = encode((lonlat.latitude + (0 * lonlat.latitude_err * 2)), // West
-                     fix_longitude((lonlat.longitude + (-1 * lonlat.longitude_err * 2))),
-                     input_size);
-  output[7] = encode((lonlat.latitude + (1 * lonlat.latitude_err * 2)), // Northwest
-                     fix_longitude((lonlat.longitude + (-1 * lonlat.longitude_err * 2))),
-                     input_size);
+  output[0] = neighbor(lonlat, dir_north, input_size); // North
+  output[1] = neighbor(lonlat, dir_northeast, input_size); // Northeast
+  output[2] = neighbor(lonlat, dir_east, input_size); // East
+  output[3] = neighbor(lonlat, dir_southeast, input_size); // Southeast
+  output[4] = neighbor(lonlat, dir_south, input_size); // South
+  output[5] = neighbor(lonlat, dir_southwest, input_size); // Southwest
+  output[6] = neighbor(lonlat, dir_west, input_size); // West
+  output[7] = neighbor(lonlat, dir_northwest, input_size); // Northwest
   return output;
 }
 
