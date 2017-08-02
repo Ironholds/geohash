@@ -1,9 +1,9 @@
 Package: geohash
 Type: Package
 Title: Tools for Geohash Creation and Manipulation
-Version: 0.2.0
-Date: 2017-06-26
-Author: Oliver Keyes [aut, cre], G. Nagel [cph]
+Version: 0.3.0
+Date: 2017-08-02
+Author: Oliver Keyes [aut, cre], Seth Wenchel [ctb], G. Nagel [cph]
 Maintainer: Oliver Keyes <ironholds@gmail.com>
 Description: Provides tools to encode lat/long pairs into geohashes, decode those geohashes,
              and identify their neighbours.

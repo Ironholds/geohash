@@ -54,4 +54,4 @@ southeast("ezs42")
 These functions are slower than encoding and decoding, since they're a lot more complex, but still pretty fast.
 
 ## Feature ideas or issues
-If you have ideas for other geohash-related features, or run into a bug, the best approachis to either [request/report it](https://github.com/Ironholds/geohash/issues) or [add it](https://github.com/Ironholds/geohash/pulls)!
+If you have ideas for other geohash-related features, or run into a bug, the best approach is to either [request/report it](https://github.com/Ironholds/geohash/issues) or [add it](https://github.com/Ironholds/geohash/pulls)!

@@ -1,3 +1,13 @@
+
+Version 0.3.0
+-------------------------------------------------------------------------
+
+* The international dateline no longer snarls up hash generation, decoding and comparison (#7, thanks to Seth Wenchel for the report and fix)
+
+* Operating systems running GCC 7.1 are now supported (#6)
+
+* Function registration is integrated
+
 Version 0.2.0
 -------------------------------------------------------------------------
 
