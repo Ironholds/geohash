@@ -27,7 +27,7 @@
 #'
 #'@export
 gh_encode <- function(lats, lngs, precision = 6L) {
-    .Call(geohash_gh_encode, lats, lngs, precision)
+    .Call(`_geohash_gh_encode`, lats, lngs, precision)
 }
 
 #'@title Decode Geohashes
@@ -52,16 +52,16 @@ gh_encode <- function(lats, lngs, precision = 6L) {
 #'# 42.60498 -5.603027 0.02197266 0.02197266
 #'@export
 gh_decode <- function(hashes) {
-    .Call(geohash_gh_decode, hashes)
+    .Call(`_geohash_gh_decode`, hashes)
 }
 
 #'@rdname neighbours
 #'@export
 gh_neighbours <- function(hashes) {
-    .Call(geohash_gh_neighbours, hashes)
+    .Call(`_geohash_gh_neighbours`, hashes)
 }
 
 gh_neighbour <- function(hashes, direction) {
-    .Call(geohash_gh_neighbour, hashes, direction)
+    .Call(`_geohash_gh_neighbour`, hashes, direction)
 }
 

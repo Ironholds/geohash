@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // gh_encode
 CharacterVector gh_encode(NumericVector lats, NumericVector lngs, IntegerVector precision);
-RcppExport SEXP geohash_gh_encode(SEXP latsSEXP, SEXP lngsSEXP, SEXP precisionSEXP) {
+RcppExport SEXP _geohash_gh_encode(SEXP latsSEXP, SEXP lngsSEXP, SEXP precisionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +20,7 @@ END_RCPP
 }
 // gh_decode
 DataFrame gh_decode(CharacterVector hashes);
-RcppExport SEXP geohash_gh_decode(SEXP hashesSEXP) {
+RcppExport SEXP _geohash_gh_decode(SEXP hashesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -31,7 +31,7 @@ END_RCPP
 }
 // gh_neighbours
 DataFrame gh_neighbours(CharacterVector hashes);
-RcppExport SEXP geohash_gh_neighbours(SEXP hashesSEXP) {
+RcppExport SEXP _geohash_gh_neighbours(SEXP hashesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -42,7 +42,7 @@ END_RCPP
 }
 // gh_neighbour
 CharacterVector gh_neighbour(CharacterVector hashes, IntegerVector direction);
-RcppExport SEXP geohash_gh_neighbour(SEXP hashesSEXP, SEXP directionSEXP) {
+RcppExport SEXP _geohash_gh_neighbour(SEXP hashesSEXP, SEXP directionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -51,4 +51,17 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(gh_neighbour(hashes, direction));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_geohash_gh_encode", (DL_FUNC) &_geohash_gh_encode, 3},
+    {"_geohash_gh_decode", (DL_FUNC) &_geohash_gh_decode, 1},
+    {"_geohash_gh_neighbours", (DL_FUNC) &_geohash_gh_neighbours, 1},
+    {"_geohash_gh_neighbour", (DL_FUNC) &_geohash_gh_neighbour, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_geohash(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
