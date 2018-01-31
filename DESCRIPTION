@@ -3,7 +3,7 @@ Type: Package
 Title: Tools for Geohash Creation and Manipulation
 Version: 0.4.0
 Date: 2018-01-31
-Author: Oliver Keyes [aut, cre], Seth Wenchel [ctb], G. Nagel [cph]
+Author: Oliver Keyes [aut, cre], Seth Wenchel [ctb], Michael Chirico [ctb], G. Nagel [cph]
 Maintainer: Oliver Keyes <ironholds@gmail.com>
 Description: Provides tools to encode lat/long pairs into geohashes, decode those geohashes,
              and identify their neighbours.
