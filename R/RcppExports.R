@@ -36,7 +36,7 @@ gh_encode <- function(lats, lngs, precision = 6L) {
 #'
 #'@param hashes a character vector of geohashes.
 #'
-#'@return a data.frame of four columns; "lat", "lng", "lat_error" and "lng_error"
+#'@return a data.frame of five columns; "gh", "lat", "lng", "lat_error" and "lng_error"
 #'
 #'@seealso \code{\link{gh_encode}} for generating geohashes, and
 #'\code{\link{gh_neighbours}} for identifying the neighbouring hash boxes
@@ -48,8 +48,8 @@ gh_encode <- function(lats, lngs, precision = 6L) {
 #'#[1] "ezs42"
 #'
 #'gh_decode("ezs42")
-#'# lat      lng      lat_error  lng_error
-#'# 42.60498 -5.603027 0.02197266 0.02197266
+#'#      gh      lat       lng  lat_error  lng_error
+#'# 1 ezs42 42.60498 -5.603027 0.02197266 0.02197266
 #'@export
 gh_decode <- function(hashes) {
     .Call(`_geohash_gh_decode`, hashes)
