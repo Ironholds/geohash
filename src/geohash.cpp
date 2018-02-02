@@ -125,7 +125,8 @@ DataFrame gh_decode(CharacterVector hashes){
                            _["lat"] = lats,
                            _["lng"] = lngs,
                            _["lat_error"] = lat_error,
-                           _["lng_error"] = lng_error);
+                           _["lng_error"] = lng_error,
+                           _["stringsAsFactors"] = false);
 }
 
 //'@rdname neighbours

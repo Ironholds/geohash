@@ -3,7 +3,7 @@ testthat::context("Test geohash decoding")
 testthat::test_that("A simple lat/lng pair will correctly decoding", {
 
   result <- gh_decode("ezs42")
-  testthat::expect_equal(result$gh[1L], structure(1L, .Label = "ezs42", class = "factor"))
+  testthat::expect_equal(result$gh[1L], "ezs42")
   testthat::expect_lt(result$lat[1], 43)
   testthat::expect_gt(result$lat[1], 42)
   testthat::expect_lt(result$lng[1], -4)
