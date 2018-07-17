@@ -1,6 +1,7 @@
 testthat::context("Test geohash bbox")
 
 testthat::test_that("A simple lat/lng pair will correctly decoding", {
+  raw_bbox = list()
   raw_bbox <- geohash::gh_decode(geohash::gh_encode(lat = 39.949958,lng = 116.46343,precision = 8))
     
   res_bbox[[1]] <- list(lat = raw_bbox$lat - raw_bbox$lat_error,
