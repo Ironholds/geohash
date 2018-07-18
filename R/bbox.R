@@ -42,6 +42,8 @@
 gh_bbox <- function(lat = 39.949958, lng = 116.46343, precision = 8){
    raw_bbox <- geohash::gh_decode(geohash::gh_encode(lat,lng,precision))  
    
+   res_bbox = list()
+   
    res_bbox[[1]] <- list(lat = raw_bbox$lat - raw_bbox$lat_error,
                          lng = raw_bbox$lng - raw_bbox$lng_error)
    res_bbox[[2]] <- list(lat = raw_bbox$lat - raw_bbox$lat_error,
